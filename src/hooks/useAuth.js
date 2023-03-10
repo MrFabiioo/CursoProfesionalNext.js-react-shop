@@ -24,10 +24,13 @@ export function ProviderAuth({ children }) {
             'Content-Type': 'application/json',
         },
         };
-        const {
-            data: { access_token },
-            } = await axios.post(endPoints.auth.login, { email, password }, options)
-        console.log(access_token);
+        const {data: access_token } = await axios.post(endPoints.auth.login, { email, password }, options)
+            if(access_token){
+                Cookie.set('token', access_token.access_token, {expires: 5}); 
+                //expires permite que después de un tiempo definido podamos eliminar la información almacenada y pueda volver a logear
+            }else{
+                console.error("te jodite");
+            }
     };
 
     return {

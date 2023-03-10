@@ -7,13 +7,13 @@ export default function LoginPage() {
     const passwordRef =   useRef(null);
     const auth = useAuth();
 
-    const submitHandler =(event) =>{
+    const submitHandler =(event) =>{      
         event.preventDefault();
         const email = emailRef.current.value;
         const password= passwordRef.current.value;
-        auth.signIn(email, password).then(() => {
+        auth.signIn(email,password).then(() => {
             console.log('Login success');
-            });
+            }).catch(error=>(error,alert("te jodite")));
         };
 
     return (
