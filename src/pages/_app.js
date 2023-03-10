@@ -1,14 +1,17 @@
-import '@styles/tailwind.css'
-import MainLayout from '@layout/MainLayout'
+import { ProviderAuth } from '@hooks/useAuth';
+import MainLayout from '@layaout/MainLayout';
+import '@styles/tailwind.css';
 
 function MyApp({ Component, pageProps }) {
-  return(
-    <>
-    <MainLayout>
-      <Component {...pageProps} />
-    </MainLayout>
-    </>
-  )
+return (
+<>
+<ProviderAuth>
+<MainLayout>
+<Component {...pageProps} />
+</MainLayout>
+</ProviderAuth>
+</>
+);
 }
 
-export default MyApp
+export default MyApp;
