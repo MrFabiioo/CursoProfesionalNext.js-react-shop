@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { useAuth } from '@hooks/useAuth';
 
 const userData = {
     name: 'Tom Cook',
@@ -23,6 +24,13 @@ const userData = {
     }
     
     export default function Header() {
+        const auth = useAuth();
+        const userData = {
+            name: auth?.user?.name,
+            email: auth?.user?.email,
+            imageUrl: `https://ui-avatars.com/api/?name=${auth?.user?.name}`,
+            };
+
     return (
         <>
             <Disclosure as="nav" className="bg-gray-800">
