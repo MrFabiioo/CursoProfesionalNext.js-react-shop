@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { ValidationSchema } from '@common/ValidationSchema';
+import { addProduct } from '@services/api/products';
 
 export default function FormProduct() {
     const formRef = useRef(null);
@@ -14,13 +15,16 @@ export default function FormProduct() {
         categoryId: parseInt(formData.get('category')),
         images: [formData.get('images').name],
         };
-        console.log(data);
 
         const valid = await ValidationSchema.validate(data)
-    .catch(function (err) {
+        .catch(function (err) {
         alert(err.message);
         });
         console.log({ valid }); //Imprime los datos después de la validación
+
+        addProduct(data).then((response)=>{
+            console.log(response);
+        })
     };
     
     
