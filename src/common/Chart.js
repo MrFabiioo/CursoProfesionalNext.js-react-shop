@@ -4,11 +4,11 @@ import {Bar} from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export const Chart = ({ charData}) => {
+export const Chart = ({ chartData}) => {
     return(
         <>
             <Bar
-                data={charData}
+                data={chartData}
                 options={{
                     title: {
                         display: true,
@@ -24,3 +24,5 @@ export const Chart = ({ charData}) => {
         </>
     );
 };
+
+
