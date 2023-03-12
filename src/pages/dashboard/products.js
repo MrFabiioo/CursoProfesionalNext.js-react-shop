@@ -1,11 +1,13 @@
 import {  useState,useEffect } from 'react';
-import { CheckIcon } from '@heroicons/react/solid';
+import { CheckIcon,XCircleIcon } from '@heroicons/react/solid';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
 import axios from 'axios';
 import endPoints from '@services/api';
 import Alert from '@common/Alert';
 import useAlert from '@hooks/useAlert';
+import { deleteProduct } from '@services/api/products';
+
 
 export default function products() {
 const [open,setOpen]=useState(false);
@@ -24,6 +26,17 @@ useEffect(() => {
         console.log(error);
     }
 }, [alert]);
+
+const handleDelete =(id)=>{
+    deleteProduct(id).then(()=>{
+        setAlert({
+            active:true,
+            message:'Delete product successfully',
+            type:'error',
+            autoClose:true,
+        });
+    });
+};
     return (
         <>
         <Alert alert={alert} handleClose={toggleAlert}/>
@@ -98,9 +111,7 @@ useEffect(() => {
                             </a>
                         </td>
                         <td className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                            Delete
-                            </a>
+                            <XCircleIcon className='flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer' aria-hidden='true' onClick={()=>handleDelete(product?.id)}/>
                         </td>
                         </tr>
                     ))}
