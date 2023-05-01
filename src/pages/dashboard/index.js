@@ -1,25 +1,23 @@
 import endPoints from '@services/api';
 import useFetch from '@hooks/useFetch';
 import { Chart } from '@common/Chart';
-import Image from 'next/image';
+//import Image from 'next/image';
 import Link from 'next/link';
 import Paginate from '@components/Paginate';
 import { useState } from 'react';
-import useAlert from '@hooks/useAlert';
-import Alert from '@common/Alert';
-import { deleteProduct } from '@services/api/products';
+//import useAlert from '@hooks/useAlert';
+//import Alert from '@common/Alert';
+//import { deleteProduct } from '@services/api/products';
 
 const PRODUCT_LIMIT = 5;
 
 export default function Dashboard() {
-  const { alert, setAlert, toggleAlert } = useAlert();
   const [offsetProducts, setOffsetProducts] = useState(0);
   const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, offsetProducts));
   const categoryNames = products?.map((product) => product.category);
   const categoryCount = categoryNames?.map((category) => category.name);
   const totalProducts = useFetch(endPoints.products.getProducts(0, 0)).length;
   const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
-
 
   const data = {
     datasets: [
@@ -45,7 +43,6 @@ export default function Dashboard() {
 
   return (
     <>
-    <Alert alert={alert} handleClose={toggleAlert} />
       <Chart className="mb-8 mt-2" chartData={data} />
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -75,26 +72,13 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                {totalProducts > 0 && (
-                    <Paginate
-                      totalItems={totalProducts}
-                      itemsPerPage={PRODUCT_LIMIT}
-                      setOffset={setOffsetProducts}
-                      neighbours={3}
-                    ></Paginate>
-                  )}
+                  {totalProducts > 0 && <Paginate totalItems={totalProducts} itemsPerPage={PRODUCT_LIMIT} setOffset={setOffsetProducts} neighbours={3}></Paginate>}
                   {products.map((product) => (
                     <tr key={product?.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                          <img
-                              className="h-10 w-10 rounded-full"
-                              src={product.images[0]}
-                              width={100}
-                              height={100}
-                              alt=""
-                            />
+                            <img className="h-10 w-10 rounded-full" src={product.images[0]} width={100} height={100} alt="" />
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">{product?.title}</div>

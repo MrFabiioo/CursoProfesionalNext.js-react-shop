@@ -41,4 +41,4 @@ const uploadImage = async (image) => {
   const res = await axios.post(endPoints.files.postFiles, body, config);
   return res.data;
 };
-export { addProduct, deleteProduct, updateProduct ,uploadImage};
+export { addProduct, deleteProduct, updateProduct, uploadImage };
