@@ -2,19 +2,43 @@ import axios from 'axios';
 import endPoints from '@services/api';
 
 const addProduct = async (body) => {
-    const config = {
-        headers: {
-        accept: '*/*',
-        'Content-Type': 'application/json',
-        },
-    };
-    const response = await axios.post(endPoints.products.addProducts, body, config);
-    return response.data;
+  const config = {
+    headers: {
+      accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  };
+  const response = await axios.post(endPoints.products.addProducts, body, config);
+  return response.data;
 };
 
-const deleteProduct=async(id)=>{
-    const response= await axios.delete(endPoints.products.deleteProduct(id));
-    return response.data;
-}
+const deleteProduct = async (id) => {
+  const response = await axios.delete(endPoints.products.deleteProduct(id));
+  return response.data;
+};
 
-export { addProduct ,deleteProduct};
+const updateProduct = async (id, body) => {
+  const config = {
+    headers: {
+      accept: '*/*',
+      'Content-Type': 'application/json',
+    },
+  };
+  const response = await axios.put(endPoints.products.updateProducts(id), body, config);
+  return response.data;
+};
+
+const uploadImage = async (image) => {
+  const body = {
+    file: image,
+  };
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      accept: '*/*',
+    },
+  };
+  const res = await axios.post(endPoints.files.postFiles, body, config);
+  return res.data;
+};
+export { addProduct, deleteProduct, updateProduct ,uploadImage};

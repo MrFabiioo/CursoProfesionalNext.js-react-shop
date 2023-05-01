@@ -1,24 +1,22 @@
-import { useState, useEffect } from "react"; //Se importa desde react
-import axios from "axios"; //Con axios vamos a realizar las peticiones
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const useFetch = (endpoint) => {
-    const [data, setData] = useState([]); //Array vacío
+  const [data, setData] = useState([]);
+  async function fetchData() {
+    const response = await axios.get(endpoint);
+    setData(response.data);
+  }
 
-    async function fetchData(){
-        const response = await axios.get(endpoint); //Llamado
-        setData(response.data);
+  useEffect(() => {
+    try {
+      fetchData();
+    } catch (error) {
+      /* empty */
     }
-    //useEffect permite ejecutar el llamado cuando se necesite
-    useEffect(() => {
-        try {
-            fetchData();
-        } catch (error) {
-            console.log(error);
-        }
-    }, []); //El array debe estar vacío cuando no se usa Pagination
-
-    return data;
+    /*   eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [endpoint]);
+  return data;
 };
 
 export default useFetch;
