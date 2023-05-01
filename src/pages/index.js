@@ -99,7 +99,8 @@ export default function Home() {
                 <span className="block xl:inline">Dashboard del proyecto:</span> <span className="block text-indigo-600 xl:inline">Yard Sale tienda Oline</span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Este proyecto para el programa de Gerencia de proyectos del Politecnico GranColombiano se realizó con una plantilla "gratuita" de internet especificamente de tailwinds, pero toda la logica la hice yo, algunos elementos no tienen funcionalidad. Para mayor informacion ver el manual del usuario.
+                Este proyecto para el programa de Gerencia de proyectos del Politecnico GranColombiano se realizó con una plantilla gratuita de internet especificamente de tailwinds, pero toda logica.
+                la hice yo, algunos elementos no tienen funcionalidad. Para mayor informacion ver el manual del usuario.
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
